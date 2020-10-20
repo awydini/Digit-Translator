@@ -15,16 +15,16 @@ public class OneDigitTranslator extends AbstractDigitTranslator
     static
     {
         ONE_DIGIT_NUMBER_TRANSLATION = new HashMap<>();
-        ONE_DIGIT_NUMBER_TRANSLATION.put(0l, "صفر");
-        ONE_DIGIT_NUMBER_TRANSLATION.put(1l, "یک");
-        ONE_DIGIT_NUMBER_TRANSLATION.put(2l, "دو");
-        ONE_DIGIT_NUMBER_TRANSLATION.put(3l, "سه");
-        ONE_DIGIT_NUMBER_TRANSLATION.put(4l, "چهار");
-        ONE_DIGIT_NUMBER_TRANSLATION.put(5l, "پنج");
-        ONE_DIGIT_NUMBER_TRANSLATION.put(6l, "شش");
-        ONE_DIGIT_NUMBER_TRANSLATION.put(7l, "هفت");
-        ONE_DIGIT_NUMBER_TRANSLATION.put(8l, "هشت");
-        ONE_DIGIT_NUMBER_TRANSLATION.put(9l, "نه");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(0l, "zero");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(1l, "one");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(2l, "two");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(3l, "three");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(4l, "four");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(5l, "five");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(6l, "six");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(7l, "seven");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(8l, "eight");
+        ONE_DIGIT_NUMBER_TRANSLATION.put(9l, "nine");
 
     }
     
@@ -36,9 +36,9 @@ public class OneDigitTranslator extends AbstractDigitTranslator
     
 
     @Override
-    public String translateNumber(Long number)
+    public void translateNumber(Long number)
     {
-        return ONE_DIGIT_NUMBER_TRANSLATION.get(number);
+        messageQueue.addToQue(ONE_DIGIT_NUMBER_TRANSLATION.get(number));
     }
 
 

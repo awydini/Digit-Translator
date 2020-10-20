@@ -1,5 +1,6 @@
 package net.aydini.translate.number;
 
+import net.aydini.translate.message.MessageQueue;
 import net.aydini.translate.number.exception.NumberTranslationException;
 import net.aydini.translate.sign.SignTranslator;
 
@@ -17,10 +18,14 @@ public abstract class AbstractDigitTranslator implements NumberTranslator, Numbe
     private final Long maxRange;
     
     private  boolean negative;
+    protected MessageQueue messageQueue;
+    
+    
 
     public AbstractDigitTranslator(Long maxRange)
     {
         this.maxRange=maxRange;
+        this.messageQueue= MessageQueue.getInstanse();
     }
     
     public void validate(Long number)
@@ -35,13 +40,21 @@ public abstract class AbstractDigitTranslator implements NumberTranslator, Numbe
     {
         validate(number);
         setNegetive(number.longValue()<0l);
-        String sign = signTranslator.translateSign(number);
-        if(!sign.equals(""))
-            sign = sign + " ";
-        return  sign + translateNumber(Math.abs(number));
+        transLateSign(number);
+        translateNumber(Math.abs(number));
+         
+        return messageQueue.translateMessageQue();
     }
     
-    public abstract String translateNumber(Long number);
+    private void transLateSign(Long number)
+    {
+        String sign = signTranslator.translateSign(number);
+        messageQueue.addToQue(sign);
+        if(!sign.equals(""))
+            messageQueue.addToQue(" ");
+    }
+    
+    public abstract void translateNumber(Long number);
 
 
     public Long getMaxRange()
@@ -59,5 +72,6 @@ public abstract class AbstractDigitTranslator implements NumberTranslator, Numbe
     {
         this.negative=negative;
     }
+    
     
 }

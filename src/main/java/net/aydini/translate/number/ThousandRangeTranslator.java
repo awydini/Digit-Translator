@@ -15,7 +15,7 @@ public class ThousandRangeTranslator extends AbstractDigitTranslator
 {
 
     private static final Integer THOUSAND = 1000;
-    private static final String THOUSAND_STRING = "هزار";
+    private static final String THOUSAND_STRING = "thousand";
 
     
     private static final Map<Long, String> THOUSAND_NUMBER_TRANSLATION;
@@ -23,9 +23,9 @@ public class ThousandRangeTranslator extends AbstractDigitTranslator
     {
         THOUSAND_NUMBER_TRANSLATION = new HashMap<>();
         
-        THOUSAND_NUMBER_TRANSLATION.put(1000l, "هزار");
-        THOUSAND_NUMBER_TRANSLATION.put(10000l, "ده هزار");
-        THOUSAND_NUMBER_TRANSLATION.put(100000l, "صد هزار");
+        THOUSAND_NUMBER_TRANSLATION.put(1000l, "thousand");
+        THOUSAND_NUMBER_TRANSLATION.put(10000l, "ten-thousand");
+        THOUSAND_NUMBER_TRANSLATION.put(100000l, "one-hundred-thousand");
     }
     public ThousandRangeTranslator()
     {
@@ -33,24 +33,23 @@ public class ThousandRangeTranslator extends AbstractDigitTranslator
     }
 
     @Override
-    public String translateNumber(Long number)
+    public void translateNumber(Long number)
     {
 
         if (THOUSAND_NUMBER_TRANSLATION.get(number) != null)
-            return THOUSAND_NUMBER_TRANSLATION.get(number);
-
-        StringBuilder stringBuilder = new StringBuilder();
+        {
+            messageQueue.addToQue(THOUSAND_NUMBER_TRANSLATION.get(number));
+            return;
+        }
 
         long xThousand = number / THOUSAND;
         NumberTranslator oneDigitTranslator = DigitTranslatorFactory.createInstance(xThousand);
-
         NumberTranslator remainingDigitsTranslator = DigitTranslatorFactory.createInstance(number % THOUSAND);
 
-        stringBuilder.append(oneDigitTranslator.translate(xThousand)).append(" ")
-        .append(THOUSAND_STRING);
+        messageQueue.addToQue(oneDigitTranslator.translate(xThousand)).addToQue(" ")
+        .addToQue(THOUSAND_STRING);
         if(number % THOUSAND != 0)
-            stringBuilder.append(" ").append("و").append(" ").append(remainingDigitsTranslator.translate(number % THOUSAND));
-        return stringBuilder.toString();
+            messageQueue.addToQue(" ").addToQue("and").addToQue(" ").addToQue(remainingDigitsTranslator.translate(number % THOUSAND));
     }
 
 }
