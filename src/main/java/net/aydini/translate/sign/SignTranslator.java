@@ -15,8 +15,8 @@ public class SignTranslator
     static
     {
         SIGN_TRANSLATION = new HashMap<Boolean, String>();
-        SIGN_TRANSLATION.put(true, "منفی");
-        SIGN_TRANSLATION.put(false, "مثبت");
+        SIGN_TRANSLATION.put(true, "negative");
+        SIGN_TRANSLATION.put(false, "positive");
         SIGN_TRANSLATION.put(null, "");
     }
     
