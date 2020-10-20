@@ -24,8 +24,6 @@ public class ThousandRangeTranslator extends AbstractDigitTranslator
         THOUSAND_NUMBER_TRANSLATION = new HashMap<>();
         
         THOUSAND_NUMBER_TRANSLATION.put(1000l, "thousand");
-        THOUSAND_NUMBER_TRANSLATION.put(10000l, "ten-thousand");
-        THOUSAND_NUMBER_TRANSLATION.put(100000l, "one-hundred-thousand");
     }
     public ThousandRangeTranslator()
     {

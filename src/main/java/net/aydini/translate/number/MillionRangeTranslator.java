@@ -1,8 +1,5 @@
 package net.aydini.translate.number;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.aydini.translate.factory.DigitTranslatorFactory;
 
 /**
@@ -17,15 +14,6 @@ public class MillionRangeTranslator extends AbstractDigitTranslator
     private static final Integer THOUSAND = 1000000;
     private static final String THOUSAND_STRING = "million";
 
-    private static final Map<Long, String> FOUR_DIGIT_NUMBER_TRANSLATION;
-    static
-    {
-        FOUR_DIGIT_NUMBER_TRANSLATION = new HashMap<>();
-
-        FOUR_DIGIT_NUMBER_TRANSLATION.put(1000l, "million");
-        FOUR_DIGIT_NUMBER_TRANSLATION.put(10000l, "ten-million");
-        FOUR_DIGIT_NUMBER_TRANSLATION.put(100000l, "one-hundred-million");
-    }
 
     public MillionRangeTranslator()
     {
@@ -35,13 +23,6 @@ public class MillionRangeTranslator extends AbstractDigitTranslator
     @Override
     public void translateNumber(Long number)
     {
-
-        if (FOUR_DIGIT_NUMBER_TRANSLATION.get(number) != null)
-        {
-            messageQueue.addToQue(FOUR_DIGIT_NUMBER_TRANSLATION.get(number));
-            return;
-        }
-
 
         long xThousand = number / THOUSAND;
         NumberTranslator oneDigitTranslator = DigitTranslatorFactory.createInstance(xThousand);
