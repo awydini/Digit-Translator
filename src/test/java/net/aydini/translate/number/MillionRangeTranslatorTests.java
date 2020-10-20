@@ -31,9 +31,9 @@ public class MillionRangeTranslatorTests
         
         private Map<Long,String> getMap()
         {
-            map.put(-1000001l, "منفی یک ملیون و یک");
-            map.put(-17123456l, "منفی هفده ملیون و صد و بیست و سه هزار و چهارصد و پنجاه و شش");
-            map.put(900000001l, "نهصد ملیون و یک");
+            map.put(-1000001l, "منفی یک میلیون و یک");
+            map.put(-17123456l, "منفی هفده میلیون و صد و بیست و سه هزار و چهارصد و پنجاه و شش");
+            map.put(900000001l, "نهصد میلیون و یک");
             return map;
         }
         
