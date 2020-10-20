@@ -35,10 +35,10 @@ public class MessageQueue
         return stringBuilder.toString();
     }
     
-    public List<String> addToQue(String message)
+    public MessageQueue addToQue(String message)
     {
         messageQueue.add(message);
-        return messageQueue;
+        return this;
     }
     
 }
