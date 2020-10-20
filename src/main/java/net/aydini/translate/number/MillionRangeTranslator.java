@@ -11,9 +11,6 @@ import net.aydini.translate.factory.DigitTranslatorFactory;
 public class MillionRangeTranslator extends AbstractDigitTranslator
 {
 
-    private static final Integer THOUSAND = 1000000;
-    private static final String THOUSAND_STRING = "million";
-
 
     public MillionRangeTranslator()
     {
@@ -24,14 +21,14 @@ public class MillionRangeTranslator extends AbstractDigitTranslator
     public void translateNumber(Long number)
     {
 
-        long xThousand = number / THOUSAND;
+        long xThousand = number / Constant.MILLION;
         NumberTranslator oneDigitTranslator = DigitTranslatorFactory.createInstance(xThousand);
 
-        NumberTranslator remainingDigitsTranslator = DigitTranslatorFactory.createInstance(number % THOUSAND);
+        NumberTranslator remainingDigitsTranslator = DigitTranslatorFactory.createInstance(number % Constant.MILLION);
 
-        messageQueue.addToQue(oneDigitTranslator.translate(xThousand)).addToQue(" ").addToQue(THOUSAND_STRING);
-        if (number % THOUSAND != 0)
-            messageQueue.addToQue(" ").addToQue("و").addToQue(" ").addToQue(remainingDigitsTranslator.translate(number % THOUSAND));
+        messageQueue.addToQue(oneDigitTranslator.translate(xThousand)).addToQue(" ").addToQue(Constant.MILLION_RANGE.get(Constant.MILLION));
+        if (number % Constant.MILLION != 0)
+            messageQueue.addToQue(" ").addToQue("و").addToQue(" ").addToQue(remainingDigitsTranslator.translate(number % Constant.MILLION));
     }
 
 }

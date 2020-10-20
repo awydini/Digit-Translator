@@ -1,8 +1,5 @@
 package net.aydini.translate.number;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.aydini.translate.factory.DigitTranslatorFactory;
 
 /**
@@ -13,21 +10,7 @@ import net.aydini.translate.factory.DigitTranslatorFactory;
  */
 public class ThreeDigitsTranslator extends AbstractDigitTranslator
 {
-    private static final Map<Long, String> THREE_DIGIT_NUMBER_TRANSLATION;
-    static
-    {
-        THREE_DIGIT_NUMBER_TRANSLATION = new HashMap<>();
-
-        THREE_DIGIT_NUMBER_TRANSLATION.put(100l, "one-hundred");
-        THREE_DIGIT_NUMBER_TRANSLATION.put(200l, "two-hundred");
-        THREE_DIGIT_NUMBER_TRANSLATION.put(300l, "three-hundred");
-        THREE_DIGIT_NUMBER_TRANSLATION.put(400l, "four-hundred");
-        THREE_DIGIT_NUMBER_TRANSLATION.put(500l, "five-hundred");
-        THREE_DIGIT_NUMBER_TRANSLATION.put(600l, "six-hundred");
-        THREE_DIGIT_NUMBER_TRANSLATION.put(700l, "seven-hundred");
-        THREE_DIGIT_NUMBER_TRANSLATION.put(800l, "eight-hundred");
-        THREE_DIGIT_NUMBER_TRANSLATION.put(900l, "nine-hundred");
-    }
+    
 
     public ThreeDigitsTranslator()
     {
@@ -37,13 +20,14 @@ public class ThreeDigitsTranslator extends AbstractDigitTranslator
     @Override
     public void translateNumber(Long number)
     {
-        if (number % 100 == 0)
+        String translation = Constant.THREE_DIGIT.get(number);
+        if (translation != null)
         {
-            messageQueue.addToQue(THREE_DIGIT_NUMBER_TRANSLATION.get(number));
+            messageQueue.addToQue(translation);
             return;
         }
         NumberTranslator numberTranslator = DigitTranslatorFactory.createInstance(number % 100);
-        messageQueue.addToQue(THREE_DIGIT_NUMBER_TRANSLATION.get((number / 100) * 100))
+        messageQueue.addToQue(Constant.THREE_DIGIT.get((number / 100) * 100))
         .addToQue(" ").addToQue("and").addToQue(" ")
         .addToQue(numberTranslator.translate(number % 100));
     }
